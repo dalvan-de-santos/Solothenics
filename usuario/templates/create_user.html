@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Create User</h1>
+    <div class="login-card">
+        <form action="{% url 'create_user' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="">Usuario</label><br>
+            <input type="text" name="username" placeholder="Crie seu nome de usuario">
+        </div>
+
+        <div class="form-group">
+            <label for="">E-mail</label><br>
+            <input type="email" name="email" placeholder="Digite seu email">
+        </div>
+
+        <div class="form-group">
+            <label for="">Senha</label><br>
+            <input type="password" name="senha" placeholder="Crie sua senha">
+        </div>
+
+        <button type="submit">Criar</button>
+
+        </form>
+    </div>
+{% endblock content %}
