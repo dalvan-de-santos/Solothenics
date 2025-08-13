@@ -1,7 +1,192 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Homepage</h1>
-    <a href="{% url 'create_user' %}">Criar usuario</a>
-    <a href="{% url 'login_user' %}">Login</a>
+     <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#">
+        <div class="logo" aria-hidden="true"></div>
+        <span>SoloThenics</span>
+      </a>
+      <div class="nav-actions">
+        <a class="btn" href="#features">Explorar</a>
+        <a class="btn" href="{% url 'login_user' %}">Entrar</a>
+        <a class="btn btn-primary" href="{% url 'create_user' %}">Criar conta</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Calistenia • Rank seu próprio corpo</span>
+          <h1 class="title">Desperte seu Rank e evolua <span style="background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent;">todos os dias</span>.</h1>
+          <p class="subtitle">Um sistema gamificado de treinos de calistenia inspirado em Solo Leveling: missões diárias, progressão por ranks e atributos visíveis. Sem máquinas, só você contra o seu próximo nível.</p>
+          <div class="cta">
+            <a class="btn btn-primary" href="{% url 'create_user' %}">Começar agora</a>
+            <a class="btn" href="{% url 'login_user' %}">Já tenho conta</a>
+            <a class="btn" href="#ranks">Ver ranks</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="stats">
+            <div class="stat">
+              <div class="num" data-count="21">21</div>
+              <div class="lbl">Missões/semana</div>
+            </div>
+            <div class="stat">
+              <div class="num" data-count="3">3</div>
+              <div class="lbl">Atributos chave</div>
+            </div>
+            <div class="stat">
+              <div class="num" data-count="7">7</div>
+              <div class="lbl">Ranks de evolução</div>
+            </div>
+          </div>
+          <ul class="list" style="margin-top:14px">
+            <li><span class="dot"></span><span>Planos de treino por objetivo: força, resistência e mobilidade.</span></li>
+            <li><span class="dot"></span><span>Missões com recompensas: XP, títulos e conquistas.</span></li>
+            <li><span class="dot"></span><span>Relatórios semanais e curva de progressão.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features">
+      <div class="container">
+        <h2 class="section-title">Por que treinar aqui?</h2>
+        <p class="muted">Combine o estilo “hunter” com treinos inteligentes de calistenia. Visual, metas claras e feedback imediato.</p>
+        <div class="grid grid-3" style="margin-top:16px">
+          <div class="card">
+            <span class="badge">Missões diárias</span>
+            <h3 style="margin:10px 0 6px">Desafios que contam</h3>
+            <p class="muted">Receba missões de flexões, barras, pranchas e mobilidade. Conclua, marque como feito e suba de rank.</p>
+            <ul class="list">
+              <li><span class="dot"></span><span>Rotas para iniciantes ao avançado</span></li>
+              <li><span class="dot"></span><span>Modo “raide”: treino denso em 20–30 min</span></li>
+              <li><span class="dot"></span><span>Recompensas com XP e títulos</span></li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="badge">Atributos</span>
+            <h3 style="margin:10px 0 6px">Força, resistência e mobilidade</h3>
+            <p class="muted">Acompanhe seus atributos com barras de progresso e desbloqueie variações mais difíceis conforme evolui.</p>
+            <ul class="list">
+              <li><span class="dot"></span><span>Progressões: joelho → full → explosivo</span></li>
+              <li><span class="dot"></span><span>Testes semanais para calibrar o nível</span></li>
+              <li><span class="dot"></span><span>Gráficos simples e objetivos</span></li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="badge">Guilda</span>
+            <h3 style="margin:10px 0 6px">Treine com a sua “party”</h3>
+            <p class="muted">Crie ou entre em grupos, compartilhe missões e compare seu rank com amigos (opcional).</p>
+            <ul class="list">
+              <li><span class="dot"></span><span>Quadro de líderes semanal</span></li>
+              <li><span class="dot"></span><span>Feed de conquistas</span></li>
+              <li><span class="dot"></span><span>Desafios cooperativos</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RANKS -->
+    <section id="ranks">
+      <div class="container">
+        <h2 class="section-title">Evolução por ranks</h2>
+        <p class="muted">Suba de E → S completando missões e checkpoints de desempenho. Cada rank desbloqueia novas variações.</p>
+        <div class="grid grid-3" style="margin-top:16px">
+          <div class="card">
+            <div class="rank">
+              <div class="gem" aria-hidden="true"></div>
+              <strong>Rank E/D</strong>
+            </div>
+            <p class="muted">Base sólida e técnica correta.</p>
+            <ul class="list">
+              <li><span class="dot"></span><span>Flexão joelho/alta inclinação</span></li>
+              <li><span class="dot"></span><span>Barra australiana</span></li>
+              <li><span class="dot"></span><span>Prancha 20–30s</span></li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="rank">
+              <div class="gem" aria-hidden="true"></div>
+              <strong>Rank C/B</strong>
+            </div>
+            <p class="muted">Volume e controle.</p>
+            <ul class="list">
+              <li><span class="dot"></span><span>Flexão padrão/diamante</span></li>
+              <li><span class="dot"></span><span>Pull-ups assistidos</span></li>
+              <li><span class="dot"></span><span>Prancha 45–60s</span></li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="rank">
+              <div class="gem" aria-hidden="true"></div>
+              <strong>Rank A/S</strong>
+            </div>
+            <p class="muted">Intensidade e habilidade.</p>
+            <ul class="list">
+              <li><span class="dot"></span><span>Archer/Explosivas</span></li>
+              <li><span class="dot"></span><span>Pull-ups limpos/Pausa</span></li>
+              <li><span class="dot"></span><span>Prancha 90s/Avançadas</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEPOIMENTO -->
+    <section>
+      <div class="container grid grid-2">
+        <div class="card">
+          <span class="badge">Depoimento</span>
+          <blockquote style="margin:10px 0 0; font-size:16px; line-height:1.6">
+            “Transformei minhas manhãs em missões. O visual de rank me motiva e as progressões de calistenia
+            deixaram claro o próximo passo. Subi de D para B em 6 semanas.”
+          </blockquote>
+          <p class="muted" style="margin-top:8px">— Caio, praticante de calistenia</p>
+        </div>
+        <div class="card">
+          <span class="badge">Comece agora</span>
+          <h3 style="margin:10px 0 6px">Seu próximo nível está a um clique</h3>
+          <p class="muted">Crie sua conta, escolha um objetivo e receba sua primeira missão ainda hoje.</p>
+          <div class="cta" style="margin-top:10px">
+            <a class="btn btn-primary" href="{% url 'create_user' %}">Criar conta</a>
+            <a class="btn" href="{% url 'login_user' %}">Fazer login</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap">
+      <div>© {{ now|default:"2025" }} SoloCalis — Feito para quem evolui com o próprio peso.</div>
+      <div style="display:flex;gap:12px">
+        <a href="#features">Features</a>
+        <span class="muted">•</span>
+        <a href="#ranks">Ranks</a>
+        <span class="muted">•</span>
+        <a href="{% url 'login_user' %}">Entrar</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // contador simples animado
+    document.querySelectorAll('.num[data-count]').forEach(el=>{
+      const end = +el.dataset.count;
+      const dur = 1000, start = 0, t0 = performance.now();
+      const step = (t)=>{
+        const p = Math.min((t - t0)/dur, 1);
+        el.textContent = Math.floor(start + (end-start)*p);
+        if(p<1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    });
+  </script>
 {% endblock content %}

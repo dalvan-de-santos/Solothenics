@@ -6,10 +6,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 
 def homepage(request):
+    if request.user.is_authenticated:
+        return redirect("profile")
     return render(request, 'homepage.html')
 
 
 def create_user(request):
+    if request.user.is_authenticated:
+        return redirect("profile")
     if request.method == "GET":
         return render(request, 'create_user.html')
     
@@ -39,6 +43,8 @@ def profile(request):
 
 
 def login_user(request):
+    if request.user.is_authenticated:
+        return redirect("profile")
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
@@ -53,4 +59,4 @@ def login_user(request):
 @login_required
 def logout_user(request):
     logout(request)
-    return redirect("homepage")
+    return redirect("login_user")

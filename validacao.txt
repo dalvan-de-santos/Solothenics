@@ -1,0 +1,74 @@
+import re
+from django.contrib.auth import get_user_model, login
+from django.core.validators import EmailValidator
+from django.core.exceptions import ValidationError
+from django.contrib import messages
+from django.db.models.functions import Lower
+from django.db import IntegrityError
+from django.shortcuts import render, redirect
+from django.contrib.auth.password_validation import validate_password
+
+User = get_user_model()
+
+USERNAME_RE = re.compile(r'^[a-zA-Z0-9._-]{3,30}$')
+
+def create_user(request):
+    if request.method == "GET":
+        return render(request, 'create_user.html')
+
+    # POST
+    username = (request.POST.get("username") or "").strip()
+    email = (request.POST.get("email") or "").strip().lower()
+    password = request.POST.get("password") or ""
+    password2 = request.POST.get("password2") or ""  # adicione esse campo no form
+
+    errors = {}
+
+    # Obrigatórios
+    if not username: errors["username"] = "Informe um nome de usuário."
+    if not email: errors["email"] = "Informe um e-mail."
+    if not password: errors["password"] = "Crie uma senha."
+
+    # Formato username
+    if username and not USERNAME_RE.match(username):
+        errors["username"] = "Use 3–30 caracteres (letras, números, ponto, underline ou hífen)."
+
+    # Email válido
+    if email:
+        try:
+            EmailValidator()(email)
+        except ValidationError:
+            errors["email"] = "E-mail inválido."
+
+    # Confirmação de senha
+    if password and password2 and password != password2:
+        errors["password2"] = "As senhas não conferem."
+
+    # Força da senha (usa AUTH_PASSWORD_VALIDATORS)
+    if password:
+        try:
+            # Opcional: passe um user parcial para melhor validação
+            temp_user = User(username=username, email=email)
+            validate_password(password, user=temp_user)
+        except ValidationError as e:
+            errors["password"] = " ".join(e.messages)
+
+    # Unicidade case-insensitive
+    if username and User.objects.annotate(u=Lower("username")).filter(u=username.lower()).exists():
+        errors["username"] = "Este nome de usuário já está em uso."
+    if email and User.objects.filter(email__iexact=email).exists():
+        errors["email"] = "Este e-mail já está em uso."
+
+    if errors:
+        # Renderize com erros e valores para não perder o que o usuário digitou
+        return render(request, "create_user.html", {"errors": errors, "values": {"username": username, "email": email}})
+
+    try:
+        user = User.objects.create_user(username=username, email=email, password=password)
+    except IntegrityError:
+        # Caso haja corrida ou restrições do banco
+        messages.error(request, "Não foi possível criar sua conta agora. Tente novamente.")
+        return redirect("create_user")
+
+    login(request, user)
+    return redirect("profile")
