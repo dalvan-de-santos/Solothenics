@@ -1,0 +1,123 @@
+{% extends "base.html" %}   
+
+{% block content %}
+
+<header class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content container">
+      <div class="avatar-wrap">
+        {% if user.profile.profile_picture %}
+          <img class="avatar" src="{{ user.profile.profile_picture.url }}" alt="Foto de {{ user.get_full_name|default:user.username }}">
+        {% else %}
+          <div class="avatar placeholder" aria-label="Sem foto">
+            <span>{{ user.username|first|upper }}</span>
+          </div>
+        {% endif %}
+      </div>
+      <div class="title-block">
+        <h1 class="name">{{ user.get_full_name|default:user.username }}</h1>
+        <p class="username">@{{ user.username }}</p>
+        <div class="badges">
+          <span class="badge level">Nível {{ user.profile.nivel }}</span>
+          <span class="badge rank rank-{{ user.profile.rank|lower }}">Rank {{ user.profile.rank|upper }}</span>
+        </div>
+        <p class="created">Desde {{ user.profile.created_at|date:"d/m/Y" }}</p>
+      </div>
+      <div class="hero-actions">
+        <a class="btn primary" href="{% url 'edit_profile' %}">Editar perfil</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container grid">
+    <section class="card bio">
+      <h2>Biografia</h2>
+      <p>
+        {{ user.profile.bio|default:"Ainda não escreveu uma biografia. O que te move na calistenia?" }}
+      </p>
+    </section>
+    <a class="btn primary" href="{% url 'workout' %}">Treino Iniciante</a>
+    <section class="card progress">
+      <h2>Progresso até o próximo rank</h2>
+
+      {# Opcional: exiba pontos atuais e alvo, se você passar essas variáveis no contexto #}
+      {% if points_current and points_target %}
+        <div class="progress-meta">
+          <span><strong>Atual:</strong> {{ points_current }} pts</span>
+          <span><strong>Próximo alvo:</strong> {{ points_target }} pts</span>
+        </div>
+      {% endif %}
+
+      <div class="bar">
+        <div class="fill" style="width: {{ progress_percent|default:'0' }}%;"></div>
+      </div>
+      <div class="bar-legend">
+        <span>0%</span>
+        <span>{{ progress_percent|default:'0' }}%</span>
+        <span>100%</span>
+      </div>
+
+      <div class="milestones">
+        <div class="milestone">
+          <span class="dot"></span>
+          <span class="label">Rank E — 30 pts</span>
+        </div>
+        <div class="milestone">
+          <span class="dot"></span>
+          <span class="label">Rank D — 90 pts</span>
+        </div>
+        <div class="milestone">
+          <span class="dot"></span>
+          <span class="label">Rank C — 180 pts</span>
+        </div>
+        <div class="milestone">
+          <span class="dot"></span>
+          <span class="label">Rank B — 310 pts</span>
+        </div>
+        <div class="milestone">
+          <span class="dot"></span>
+          <span class="label">Rank A — 500 pts</span>
+        </div>
+        <div class="milestone">
+          <span class="dot"></span>
+          <span class="label">Rank S — 1000 pts</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card ladder">
+      <h2>Escada de ranks</h2>
+      <ul class="rank-list">
+        <li class="rank-item">
+          <span class="badge rank rank-e">Rank E</span>
+          <span class="need">30 pts</span>
+        </li>
+        <li class="rank-item">
+          <span class="badge rank rank-d">Rank D</span>
+          <span class="need">90 pts</span>
+        </li>
+        <li class="rank-item">
+          <span class="badge rank rank-c">Rank C</span>
+          <span class="need">180 pts</span>
+        </li>
+        <li class="rank-item">
+          <span class="badge rank rank-b">Rank B</span>
+          <span class="need">310 pts</span>
+        </li>
+        <li class="rank-item">
+          <span class="badge rank rank-a">Rank A</span>
+          <span class="need">500 pts</span>
+        </li>
+        <li class="rank-item">
+          <span class="badge rank rank-s">Rank S</span>
+          <span class="need">1000 pts</span>
+        </li>
+      </ul>
+    </section>
+  </main>
+  <a class="btn primary" href="{% url 'logout_user' %}">Logout</a>
+  <footer class="container footer">
+    <p>Treino é constância. Um dia de cada vez.</p>
+  </footer>
+
+{% endblock content %}

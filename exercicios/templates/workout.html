@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Workout Page</h2>
+    <p>Welcome to your workout dashboard!</p>
+    <a href="{% url 'profile' %}">voltar para perfil</a>
+    <ul>
+        {% for exercise in exercises %}
+            <a href="{% url 'inf_workout' exercise.id %}"><li>{{ exercise.exercise_id.name }} <form><input type="checkbox"></input></form></li></a>
+        {% endfor %}
+    </ul>
+    
+{% endblock %}

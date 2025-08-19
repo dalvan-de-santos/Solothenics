@@ -36,3 +36,12 @@
 
 
 Nome = "SoloThenics"
+
+Ranks = {
+    "Rank E": 30,
+    "Rank D": 90,
+    "Rank C": 180,
+    "Rank B": 310,
+    "Rank A": 500,
+    "Rank S": 1000
+}

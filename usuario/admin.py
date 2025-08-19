@@ -3,8 +3,8 @@ from .models import Profile, PhysicalAssessment
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'bio', 'profile_picture', 'level', 'created_at')
-    search_fields = ('user__username', 'level')
+    list_display = ('user', 'bio', 'profile_picture', 'nivel', 'created_at')
+    search_fields = ('user__username', 'nivel')
 
 @admin.register(PhysicalAssessment)
 class PhysicalAssessmentAdmin(admin.ModelAdmin):

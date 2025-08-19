@@ -1,0 +1,10 @@
+extends "base.html"
+
+{% block content %}
+    <h2>Informações do Exercício</h2>
+    <p>Nome: {{ exercise.exercise_id.name }}</p>
+    <p>Descrição: {{ exercise.exercise_id.description }}</p>
+    <p>Repetições/tempo: {{ exercise.repetitions }}</p>
+    <p>Séries: {{ exercise.sets }}</p>
+    <a href="{% url 'workout' %}">Voltar</a>
+{% endblock %}

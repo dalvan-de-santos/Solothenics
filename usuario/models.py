@@ -7,7 +7,8 @@ class Profile(models.Model):
     user = models.OneToOneField('auth.User', on_delete=models.CASCADE, related_name='profile', verbose_name='Usuário')
     bio = models.TextField(blank=True, null=True, verbose_name='Biografia')
     profile_picture = models.ImageField(upload_to='profile_pictures/%Y/%m', blank=True, null=True, verbose_name='Foto do Perfil')
-    level = models.CharField(max_length=50, default='Beginner', verbose_name='Nível')
+    nivel = models.IntegerField(default=1, verbose_name='Nível')
+    rank = models.CharField(max_length=50, default='E', verbose_name='Rank')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Data de Criação')
 
     class Meta:
